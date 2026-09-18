@@ -1,0 +1,271 @@
+import java.util.*;
+
+public class EmergencyAmbulanceOptimization {
+
+    // Travel Cost Matrix (Adjacency Matrix)
+    static int[][] costMatrix = {
+        {0, 15, 25, 35},
+        {15, 0, 30, 28},
+        {25, 30, 0, 20},
+        {35, 28, 20, 0}
+    };
+
+    // Location names
+    static String[] locations = {
+        "Hospital",
+        "Emergency Location B",
+        "Emergency Location C",
+        "Emergency Location D"
+    };
+
+
+    // ============================================
+    // Greedy Route Optimization
+    // ============================================
+    public static String greedyEAROP(int[][] dist) {
+
+        // TO BE IMPLEMENTED: Greedy Algorithm logic
+        // Write your code here
+
+        return "";
+    }
+
+
+    // ============================================
+    // Dynamic Programming Route Optimization
+    // ============================================
+    public static String dynamicProgrammingEAROP(int[][] dist) {
+
+        // TO BE IMPLEMENTED: Dynamic Programming Algorithm logic
+        // Write your code here
+
+        return "";
+    }
+
+
+    // Dynamic Programming Helper Method
+    private static int dynamicProgrammingEAROPHelper(
+            int pos,
+            int mask,
+            int[][] dist,
+            int[][] memo,
+            int VISITED_ALL,
+            String[][] paths) {
+
+        // TO BE IMPLEMENTED:
+        // Private recursive method for Dynamic Programming algorithm logic
+        // Write your code here
+
+        return 0;
+    }
+
+
+    // ============================================
+    // Backtracking Route Optimization
+    // ============================================
+    public static String backtrackingEAROP(int[][] dist) {
+
+        // TO BE IMPLEMENTED: Backtracking algorithm logic
+        // Write your code here
+
+        return "";
+    }
+
+
+    // Backtracking Helper Method
+    private static int earopBacktracking(
+            int pos,
+            int[][] dist,
+            boolean[] visited,
+            int n,
+            int count,
+            int cost,
+            StringBuilder path) {
+
+        // TO BE IMPLEMENTED:
+        // Private recursive method for Backtracking algorithm logic
+        // Write your code here
+
+        return 0;
+    }
+
+
+    // ============================================
+    // Divide and Conquer Route Optimization
+    // ============================================
+    public static String divideAndConquerEAROP(int[][] dist) {
+
+        // TO BE IMPLEMENTED: Divide and Conquer Algorithm logic
+        // Write your code here
+
+        return "";
+    }
+
+
+    // Divide and Conquer Helper Method
+    private static int divideAndConquerHelper(
+            int pos,
+            boolean[] visited,
+            int currentCost,
+            int[][] dist,
+            int n,
+            StringBuilder path) {
+
+        // TO BE IMPLEMENTED:
+        // Private recursive method for Divide and Conquer algorithm logic
+        // Write your code here
+
+        return 0;
+    }
+
+
+    // Check whether all emergency locations have been visited
+    private static boolean allVisited(boolean[] visited) {
+
+        // TO BE IMPLEMENTED:
+        // Test whether all emergency locations have been visited
+
+        return false;
+    }
+
+
+    // ============================================
+    // Insertion Sort
+    // ============================================
+    public static String insertionSort(int[] arr) {
+
+        // TO BE IMPLEMENTED: Insertion Sort Algorithm logic
+        // Write your code here
+
+        return "";
+    }
+
+
+    // ============================================
+    // Binary Search
+    // ============================================
+    public static String binarySearch(int[] arr, int target) {
+
+        // TO BE IMPLEMENTED: Binary Search Algorithm logic
+        // Write your code here
+
+        return "";
+    }
+
+
+    // ============================================
+    // Min-Heap
+    // ============================================
+    static class MinHeap {
+
+        private PriorityQueue<Integer> heap =
+                new PriorityQueue<>();
+
+        // Insert a value into the Min-Heap
+        public void insert(int value) {
+
+            // TO BE IMPLEMENTED: Heap insertion logic
+            // Write your code here
+        }
+
+
+        // Remove and return the minimum value
+        public int extractMin() {
+
+            // TO BE IMPLEMENTED: Heap extraction logic
+            // Write your code here
+
+            return 0;
+        }
+    }
+
+
+    // ============================================
+    // Splay Tree
+    // ============================================
+    static class SplayTree {
+
+        // TO BE IMPLEMENTED:
+        // Splay Tree Algorithm logic
+
+        public void insert(int value) {
+
+            // Write your code here
+        }
+
+
+        public boolean search(int value) {
+
+            // Write your code here
+
+            return false;
+        }
+    }
+
+
+    // ============================================
+    // Driver Method
+    // ============================================
+    public static void main(String[] args) {
+
+        // Route Optimization Algorithms
+        System.out.println(greedyEAROP(costMatrix));
+
+        System.out.println(dynamicProgrammingEAROP(costMatrix));
+
+        System.out.println(backtrackingEAROP(costMatrix));
+
+        System.out.println(divideAndConquerEAROP(costMatrix));
+
+
+        // ============================================
+        // Sorting and Searching
+        // ============================================
+
+        int[] arr = {8, 3, 5, 1, 9, 2};
+
+        insertionSort(arr);
+
+        System.out.println(
+                "Sorted Emergency Response Times: "
+                + Arrays.toString(arr)
+        );
+
+        System.out.println(
+                "Binary Search (Response Time 5 found at index): "
+                + binarySearch(arr, 5)
+        );
+
+
+        // ============================================
+        // Min-Heap Test
+        // ============================================
+
+        MinHeap heap = new MinHeap();
+
+        heap.insert(10);
+        heap.insert(3);
+        heap.insert(15);
+
+        System.out.println(
+                "Min-Heap Extract Minimum Priority Value: "
+                + heap.extractMin()
+        );
+
+
+        // ============================================
+        // Splay Tree Test
+        // ============================================
+
+        SplayTree tree = new SplayTree();
+
+        tree.insert(20);
+        tree.insert(10);
+        tree.insert(30);
+
+        System.out.println(
+                "Splay Tree Search (Emergency Case 10 found): "
+                + tree.search(10)
+        );
+    }
+}
