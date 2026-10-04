@@ -3,31 +3,61 @@ import java.util.*;
 public class EmergencyAmbulanceOptimization {
 
     // Travel Cost Matrix (Adjacency Matrix)
-    static int[][] costMatrix = {
-        {0, 15, 25, 35},
-        {15, 0, 30, 28},
-        {25, 30, 0, 20},
-        {35, 28, 20, 0}
+    static int[][] costMatrix ={
+                                {0, 15, 25, 35},
+                                {15, 0, 30, 28},
+                                {25, 30, 0, 20},
+                                {35, 28, 20, 0}
     };
 
     // Location names
-    static String[] locations = {
-        "Hospital",
-        "Emergency Location B",
-        "Emergency Location C",
-        "Emergency Location D"
-    };
-
+    static String[] locations ={"Hospital", "Emergency Location B", "Emergency Location C", "Emergency Location D"};
 
     // ============================================
     // Greedy Route Optimization
     // ============================================
-    public static String greedyEAROP(int[][] dist) {
+    public static String greedyEAROP(int[][] dist){
 
-        // TO BE IMPLEMENTED: Greedy Algorithm logic
-        // Write your code here
+        int n = dist.length;
+        boolean[] visited = new boolean[n];
 
-        return "";
+        int current = 0; // Start from Hospital
+        int totalCost = 0;
+
+        StringBuilder path = new StringBuilder();
+
+        path.append(locations[current]);
+
+        visited[current] = true;
+
+        // Visit the nearest unvisited location
+        for (int count = 1; count < n; count++){
+            int nearest = -1;
+            int minDistance = Integer.MAX_VALUE;
+
+            for (int i = 0; i < n; i++){
+
+                if (!visited[i] && dist[current][i] < minDistance){
+                    minDistance = dist[current][i];
+                    nearest = i;
+                }
+            }
+
+            visited[nearest] = true;
+            totalCost += minDistance;
+
+            path.append(" -> ");
+            path.append(locations[nearest]);
+
+            current = nearest;
+        }
+
+        // Return to Hospital
+        totalCost += dist[current][0];
+
+        path.append(" -> ");
+        path.append(locations[0]);
+        return "Greedy Ambulance Route: " + path + " | Total Cost: " + totalCost;    
     }
 
 
@@ -44,13 +74,7 @@ public class EmergencyAmbulanceOptimization {
 
 
     // Dynamic Programming Helper Method
-    private static int dynamicProgrammingEAROPHelper(
-            int pos,
-            int mask,
-            int[][] dist,
-            int[][] memo,
-            int VISITED_ALL,
-            String[][] paths) {
+    private static int dynamicProgrammingEAROPHelper(int pos, int mask, int[][] dist, int[][] memo, int VISITED_ALL, String[][] paths) {
 
         // TO BE IMPLEMENTED:
         // Private recursive method for Dynamic Programming algorithm logic
@@ -63,7 +87,10 @@ public class EmergencyAmbulanceOptimization {
     // ============================================
     // Backtracking Route Optimization
     // ============================================
+    private static int minBacktrackingCost = Integer.MAX_VALUE; 
+    private static String bestBacktrackingPath = ""; 
     public static String backtrackingEAROP(int[][] dist) {
+
         int n = dist.length; 
         boolean[] visited = new boolean[n]; 
         
@@ -81,15 +108,9 @@ public class EmergencyAmbulanceOptimization {
         return "Backtracking Ambulance Route: " + bestBacktrackingPath + " | Total Cost: " + minBacktrackingCost; 
     }
 
-        // Backtracking Helper Method
-    private static int earopBacktracking(
-        int pos,
-        int[][] dist,
-        boolean[] visited,
-        int n,
-        int count,
-        int cost,
-        StringBuilder path) {
+
+    // Backtracking Helper Method
+    private static int earopBacktracking(int pos, int[][] dist, boolean[] visited, int n, int count, int cost, StringBuilder path) {
 
         // Base Case: All locations visited 
         if (count == n) { 
@@ -135,13 +156,7 @@ public class EmergencyAmbulanceOptimization {
 
 
     // Divide and Conquer Helper Method
-    private static int divideAndConquerHelper(
-            int pos,
-            boolean[] visited,
-            int currentCost,
-            int[][] dist,
-            int n,
-            StringBuilder path) {
+    private static int divideAndConquerHelper( int pos, boolean[] visited, int currentCost, int[][] dist, int n, StringBuilder path){
 
         // TO BE IMPLEMENTED:
         // Private recursive method for Divide and Conquer algorithm logic
@@ -258,14 +273,10 @@ public class EmergencyAmbulanceOptimization {
 
         insertionSort(arr);
 
-        System.out.println(
-                "Sorted Emergency Response Times: "
-                + Arrays.toString(arr)
+        System.out.println("Sorted Emergency Response Times: " + Arrays.toString(arr)
         );
 
-        System.out.println(
-                "Binary Search (Response Time 5 found at index): "
-                + binarySearch(arr, 5)
+        System.out.println( "Binary Search (Response Time 5 found at index): " + binarySearch(arr, 5)
         );
 
 
@@ -279,10 +290,7 @@ public class EmergencyAmbulanceOptimization {
         heap.insert(3);
         heap.insert(15);
 
-        System.out.println(
-                "Min-Heap Extract Minimum Priority Value: "
-                + heap.extractMin()
-        );
+        System.out.println("Min-Heap Extract Minimum Priority Value: " + heap.extractMin());
 
 
         // ============================================
@@ -300,4 +308,5 @@ public class EmergencyAmbulanceOptimization {
                 + tree.search(10)
         );
     }
+    
 }
