@@ -64,29 +64,61 @@ public class EmergencyAmbulanceOptimization {
     // Backtracking Route Optimization
     // ============================================
     public static String backtrackingEAROP(int[][] dist) {
+        int n = dist.length; 
+        boolean[] visited = new boolean[n]; 
+        
+        // Reset tracking variables before each run
+        minBacktrackingCost = Integer.MAX_VALUE; 
+        bestBacktrackingPath = ""; 
 
-        // TO BE IMPLEMENTED: Backtracking algorithm logic
-        // Write your code here
+        // Start tour at Hospital Headquarters (index 0)
+        visited[0] = true; 
+        StringBuilder path = new StringBuilder(locations[0]); 
 
-        return "";
+        // Begin recursive depth-first search
+        earopBacktracking(0, dist, visited, n, 1, 0, path); 
+
+        return "Backtracking Ambulance Route: " + bestBacktrackingPath + " | Total Cost: " + minBacktrackingCost; 
     }
 
-
-    // Backtracking Helper Method
+        // Backtracking Helper Method
     private static int earopBacktracking(
-            int pos,
-            int[][] dist,
-            boolean[] visited,
-            int n,
-            int count,
-            int cost,
-            StringBuilder path) {
+        int pos,
+        int[][] dist,
+        boolean[] visited,
+        int n,
+        int count,
+        int cost,
+        StringBuilder path) {
 
-        // TO BE IMPLEMENTED:
-        // Private recursive method for Backtracking algorithm logic
-        // Write your code here
+        // Base Case: All locations visited 
+        if (count == n) { 
+            int totalCost = cost + dist[pos][0]; 
+            if (totalCost < minBacktrackingCost) { 
+                minBacktrackingCost = totalCost; 
+                bestBacktrackingPath = path.toString() + " -> " + locations[0]; 
+            }       
+            return totalCost; 
+        } 
 
-        return 0;
+        // Recursive Step: Try each unvisited emergency location 
+        for (int i = 0; i < n; i++) { 
+            if (!visited[i]) { 
+                int pathLengthBefore = path.length(); 
+
+                // 1.CHOOSE 
+                visited[i] = true; 
+                path.append(" -> ").append(locations[i]); 
+    
+                // 2. EXPLORE 
+                earopBacktracking(i, dist, visited, n, count + 1, cost + dist[pos][i], path); 
+    
+                // 3. UNCHOOSE (Backtrack) 
+                visited[i] = false; 
+                path.setLength(pathLengthBefore); 
+            } 
+        } 
+        return minBacktrackingCost; 
     }
 
 
