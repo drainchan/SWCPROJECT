@@ -179,26 +179,56 @@ public class EmergencyAmbulanceOptimization {
     // ============================================
     // Insertion Sort
     // ============================================
-    public static String insertionSort(int[] arr) {
+    public static String insertionSort(int[] arr) 
+{
 
-        // TO BE IMPLEMENTED: Insertion Sort Algorithm logic
-        // Write your code here
+    for (int i = 1; i < arr.length; i++) {
 
-        return "";
+        int key = arr[i];
+        int j = i - 1;
+
+    // Move elements greater than key one position ahead
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+
+    // Insert key into its correct position
+        arr[j + 1] = key;
     }
 
-
+    return java.util.Arrays.toString(arr);
+}
+}
     // ============================================
     // Binary Search
     // ============================================
-    public static String binarySearch(int[] arr, int target) {
+    public static String binarySearch(int[] arr, int target) 
+{
 
-        // TO BE IMPLEMENTED: Binary Search Algorithm logic
-        // Write your code here
+    int low = 0;
+    int high = arr.length - 1;
 
-        return "";
+    while (low <= high) {
+
+        int middle = low + (high - low) / 2;
+
+        if (arr[middle] == target) {
+            return String.valueOf(middle);
+        }
+
+        if (arr[middle] < target) {
+            // Search the right half
+            low = middle + 1;
+        } else {
+            // Search the left half
+            high = middle - 1;
+        }
     }
 
+    return "-1";
+}
+}
 
     // ============================================
     // Min-Heap
