@@ -147,34 +147,66 @@ public class EmergencyAmbulanceOptimization {
     // Divide and Conquer Route Optimization
     // ============================================
     public static String divideAndConquerEAROP(int[][] dist) {
+        int n = dist.length;
+        boolean[] visited = new boolean[n];
 
-        // TO BE IMPLEMENTED: Divide and Conquer Algorithm logic
-        // Write your code here
+        // Start tour at Hospital Headquarters (index 0)
+        visited[0] = true;
+        StringBuilder path = new StringBuilder("Hospital");
 
-        return "";
+        // Begin recursive divide and conquer evaluation
+        int minCost = divideAndConquerHelper(0, visited, 0, dist, n, path);
+
+        return "Divide & Conquer Ambulance Route: " + path.toString() + " | Total Cost: " + minCost;
     }
 
 
     // Divide and Conquer Helper Method
     private static int divideAndConquerHelper( int pos, boolean[] visited, int currentCost, int[][] dist, int n, StringBuilder path){
+    
+    // Base Case (Conquer: All locations visited)
+        if (allVisited(visited)) {
+            return currentCost + dist[pos][0]; // Add return edge to Hospital Headquarters
+        }
 
-        // TO BE IMPLEMENTED:
-        // Private recursive method for Divide and Conquer algorithm logic
-        // Write your code here
+        int minCost = Integer.MAX_VALUE;
 
-        return 0;
+        // Recursive Step: Try each unvisited emergency location
+        for (int next = 0; next < n; next++) {
+            if (!visited[next]) {
+                // Divide: Mark location as visited for subproblem
+                visited[next] = true;
+
+                // Conquer: Solve subproblem recursively
+                int cost = divideAndConquerHelper(next, visited, currentCost + dist[pos][next], dist, n, path);
+
+                // Combine: Retain minimum cost among all evaluated branches
+                minCost = Math.min(minCost, cost);
+
+                // Reset state for remaining branch evaluations
+                visited[next] = false;
+            }
+        }
+
+        return minCost;
+    }
+
+    // Helper method to verify if all locations have been visited
+    private static boolean allVisited(boolean[] visited) {
+        for (boolean v : visited) {
+            if (!v) return false;
+        }
+        return true;
     }
 
 
     // Check whether all emergency locations have been visited
     private static boolean allVisited(boolean[] visited) {
-
-        // TO BE IMPLEMENTED:
-        // Test whether all emergency locations have been visited
-
-        return false;
+        for (boolean v : visited) {
+            if (!v) return false;
+        }
+        return true;
     }
-
 
     // ============================================
     // Insertion Sort
