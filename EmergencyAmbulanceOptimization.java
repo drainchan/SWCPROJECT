@@ -384,7 +384,7 @@ public class EmergencyAmbulanceOptimization{
         Node root; 
  
         // ========================================= 
-        // Right Rotation 
+        // Zig Rotation 
         // ========================================= 
         private Node rightRotate(Node x) { 
  
@@ -397,7 +397,7 @@ public class EmergencyAmbulanceOptimization{
         } 
  
         // ========================================= 
-        // Left Rotation 
+        // Zag Rotation 
         // ========================================= 
         private Node leftRotate(Node x) { 
  
