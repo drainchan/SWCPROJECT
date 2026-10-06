@@ -4,11 +4,11 @@ public class EmergencyAmbulanceOptimization{
  
     // Travel Cost Matrix (Adjacency Matrix) 
     static int[][] costMatrix = { 
-            {0, 15, 25, 35}, 
-            {15, 0, 30, 28}, 
-            {25, 30, 0, 20}, 
-            {35, 28, 20, 0} 
-        }; 
+                                {0, 15, 25, 35}, 
+                                {15, 0, 30, 28}, 
+                                {25, 30, 0, 20}, 
+                                {35, 28, 20, 0} 
+                                                }; 
  
     // Location names 
     static String[] locations = {"Hospital", "Emergency Location B", "Emergency Location C", "Emergency Location D"}; 
@@ -247,13 +247,7 @@ public class EmergencyAmbulanceOptimization{
     } 
  
     // Divide and Conquer Helper Method 
-    private static int divideAndConquerHelper(
-            int pos, 
-            boolean[] visited, 
-            int currentCost, 
-            int[][] dist, 
-            int n, 
-            StringBuilder path) { 
+    private static int divideAndConquerHelper(int pos, boolean[] visited, int currentCost, int[][] dist, int n, StringBuilder path) { 
  
         // Base Case (Conquer: All locations visited) 
         if (allVisited(visited)) { 
@@ -279,22 +273,13 @@ public class EmergencyAmbulanceOptimization{
                 path.append(" -> ").append(locations[next]);
  
                 // Conquer: Solve subproblem recursively 
-                int cost = divideAndConquerHelper(
-                        next, 
-                        visited, 
-                        currentCost + dist[pos][next], 
-                        dist, 
-                        n, 
-                        path
-                ); 
+                int cost = divideAndConquerHelper(next, visited, currentCost + dist[pos][next], dist, n, path); 
  
                 // Combine: Retain minimum cost among all evaluated branches 
                 minCost = Math.min(minCost, cost); 
 
                 // Remove location from route
-                path.setLength(
-                        path.length() - (" -> " + locations[next]).length()
-                );
+                path.setLength(path.length() - (" -> " + locations[next]).length());
  
                 // Reset state for remaining branch evaluations 
                 visited[next] = false; 
@@ -367,8 +352,7 @@ public class EmergencyAmbulanceOptimization{
     // Min-Heap 
     // ============================================ 
     static class MinHeap { 
-        private PriorityQueue<Integer> heap = 
-            new PriorityQueue<>(); 
+        private PriorityQueue<Integer> heap = new PriorityQueue<>(); 
  
         // Insert a value into the Min-Heap 
         public void insert(int value) { 
@@ -631,9 +615,6 @@ public class EmergencyAmbulanceOptimization{
         tree.insert(10); 
         tree.insert(30); 
  
-        System.out.println( 
-            "Splay Tree Search (Emergency Case 10 found): " 
-            + tree.search(10) 
-        ); 
+        System.out.println("Splay Tree Search (Emergency Case 10 found): " + tree.search(10)); 
     } 
 }
